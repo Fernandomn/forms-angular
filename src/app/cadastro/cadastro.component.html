@@ -39,6 +39,7 @@
         </span>
       </div>
     </div>
+
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="nascimento">Nascimento</label>
@@ -59,7 +60,30 @@
           placeholder="(XX) XXXXX-XXXX"
           class="campo__escrita"
           ngModel
+          required
+          pattern="(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})"
         />
+        <div
+          class=""
+          *ngIf="
+            (f.controls['telefone']?.invalid &&
+              f.controls['telefone']?.touched) ||
+            f.controls['telefone']?.dirty
+          "
+        >
+          <span
+            class="error__texto"
+            *ngIf="f.controls['telefone']?.errors?.['required']"
+          >
+            O campo Contato deve ser preenchido
+          </span>
+          <span
+            class="error__texto"
+            *ngIf="f.controls['telefone']?.errors?.['pattern']"
+          >
+            O campo de telefone está fora do padrão
+          </span>
+        </div>
       </div>
     </div>
     <div class="formulario__campo">
@@ -113,20 +137,24 @@
       <label class="campo__etiqueta" for="endereco">Endereço</label>
       <input name="endereco" id="endereco" class="campo__escrita" />
     </div>
+
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="numero">Numero</label>
         <input name="numero" id="numero" class="campo__escrita" />
       </div>
+
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="complemento">Complemento</label>
         <input name="complemento" id="complemento" class="campo__escrita" />
       </div>
     </div>
+
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="bairro">Bairro</label>
       <input name="bairro" id="bairro" class="campo__escrita" />
     </div>
+
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="cidade">Cidade</label>
