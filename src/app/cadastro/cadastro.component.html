@@ -44,14 +44,21 @@
           #nascimento="ngModel"
           fullAgeValidator
         />
-        <app-message
-          *ngIf="nascimento?.errors?.['required']"
-          [message]="'A data de Nascimento deve ser preenchida'"
-        ></app-message>
-        <app-message
-          *ngIf="nascimento?.errors?.['fullAgeValidator']"
-          [message]="'O usuário deve ter mais de 18 anos'"
-        ></app-message>
+        <div
+          class=""
+          *ngIf="
+            (nascimento?.invalid && nascimento?.touched) || nascimento?.dirty
+          "
+        >
+          <app-message
+            *ngIf="nascimento?.errors?.['required']"
+            [message]="'A data de Nascimento deve ser preenchida'"
+          ></app-message>
+          <app-message
+            *ngIf="nascimento?.errors?.['fullAgeValidator']"
+            [message]="'O usuário deve ter mais de 18 anos'"
+          ></app-message>
+        </div>
       </div>
 
       <div class="formulario__campo">
@@ -120,6 +127,7 @@
         pattern="^(\d{5})(-?\d{3})$"
         minlength="8"
         maxlength="9"
+        cepValidator
         (blur)="checkCep($event, f)"
       />
       <div *ngIf="(cep.invalid && cep?.touched) || cep?.dirty">
@@ -131,6 +139,11 @@
         <app-message
           *ngIf="cep?.errors?.['pattern']"
           message="O campo de CEP deve seguir este exemplo: 00000-000"
+        >
+        </app-message>
+        <app-message
+          *ngIf="cep?.errors?.['cepValidator']"
+          message="O CEP informado não existe"
         >
         </app-message>
       </div>
