@@ -26,7 +26,7 @@ export class CadastroComponent implements OnInit {
   checkCep(ev: any, f: NgForm) {
     const cep = ev?.target?.value;
     if (cep) {
-      this.cepService.checkCep(cep).subscribe((result) => {
+      this.cepService.checkIfCepIsValid(cep).subscribe((result) => {
         console.log(result);
         this.populateAddress(result, f);
       });

@@ -11,7 +11,7 @@ export class ConsultaCepService {
 
   constructor(private http: HttpClient) {}
 
-  checkCep(cep: string, ) {
+  checkIfCepIsValid(cep: string, ) {
     return this.http.get(`${this.apiUrl}${cep}/json`);
   }
 }
